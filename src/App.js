@@ -26,10 +26,25 @@ const initialStateItems = [
 
 class App extends React.Component {
   state = {
-    items: [...initialStateItems]
+    items: [...this.getRandomQuestions(initialStateItems)],
   }
-
-  render() {
+  
+  getRandomQuestions(array) {
+    var i = array.length,
+    j = 0,
+    temp;
+    
+    while (i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      
+      temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
+  }
+  
+  render() {    
     return (   
       <div className={styles.wrapper}>
         <h2 className={styles.title}>

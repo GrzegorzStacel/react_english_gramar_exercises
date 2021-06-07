@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './App.module.scss';
 import ListWrapper from './components/ListWrapper/ListWrapper';
+import Button from './components/Button/Button';
+import stylesListItem from './components/ListWrapper/ListItem/ListItem.module.scss'
 
 const initialStateItems = [
   {
@@ -52,7 +54,18 @@ class App extends React.Component {
         collectionOfAnswerButtons[2].children[i].children[1].children[j].className = stylesListItem.answer
       }
     }
+
+    this.setStateAndUpdate();
   }
+  
+  setStateAndUpdate() {
+    this.setState({
+      items: [...this.getRandomQuestions(initialStateItems)]
+    })
+  
+    this.forceUpdate()
+  }
+  
   render() {    
     return (   
       <div className={styles.wrapper}>

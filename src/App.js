@@ -44,12 +44,27 @@ class App extends React.Component {
     return array;
   }
   
+  resetFN = (e) => {
+    const collectionOfAnswerButtons = e.target.parentElement.children
+
+    for (let i = 0; i < collectionOfAnswerButtons[2].children.length; i++) {
+      for (let j = 0; j < collectionOfAnswerButtons[2].children[i].children[1].children.length; j++){
+        collectionOfAnswerButtons[2].children[i].children[1].children[j].className = stylesListItem.answer
+      }
+    }
+  }
   render() {    
     return (   
       <div className={styles.wrapper}>
         <h2 className={styles.title}>
-            Uzupełnij odpowiednimi przyimkami czasu in/on/at
+          Uzupełnij odpowiednimi przyimkami czasu in/on/at
         </h2>
+        <Button
+            className={styles.resetBtn}    
+            handleOnClick={(e) => this.resetFN(e)}
+        >
+            RESET
+        </Button>
         <ListWrapper
           items={this.state.items}
         />

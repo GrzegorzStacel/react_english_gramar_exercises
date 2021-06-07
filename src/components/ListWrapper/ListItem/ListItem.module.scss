@@ -1,0 +1,49 @@
+$bgAnswerButton: yellow;
+$bgCorrectAnswerButton: green;
+$bgWrongAnswerButton: red;
+
+.wrapper{
+    list-style: none;
+    padding: 20px;
+    margin: 0 0 40px;
+    border: 1px solid #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    
+    .quesion{
+        font-size: 22px;
+
+        span{
+            color: red;
+        }
+    }
+
+    .answersWrapper{
+        width: 60%;
+        display: flex;
+        justify-content: space-around;
+        // margin-bottom: 20px;
+        
+        .answer{
+            color: black;
+            border: 1px solid #000;
+            padding: 10px;
+            font-size: 17px;
+            background: $bgAnswerButton;
+            padding: 10px 20px;
+            max-width: 100px;
+        }
+
+        .correct{
+            @extend .answer;
+            background: $bgCorrectAnswerButton;
+        }
+
+        .wrong{
+            @extend .answer;
+            background: $bgWrongAnswerButton;
+        }
+    }
+}

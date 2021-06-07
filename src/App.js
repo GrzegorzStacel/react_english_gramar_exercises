@@ -73,7 +73,7 @@ class App extends React.Component {
           Uzupełnij odpowiednimi przyimkami czasu in/on/at
         </h2>
         <Button
-            className={styles.resetBtn}    
+            setClassName={styles.resetBtn}    
             handleOnClick={(e) => this.resetFN(e)}
         >
             RESET

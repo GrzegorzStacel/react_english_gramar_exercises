@@ -3,6 +3,7 @@ import styles from './App.module.scss';
 import ListWrapper from './components/ListWrapper/ListWrapper';
 import Button from './components/Button/Button';
 import stylesListItem from './components/ListWrapper/ListItem/ListItem.module.scss'
+import Header from './components/Header/Header';
 
 const initialStateItems = [
   {
@@ -69,6 +70,7 @@ class App extends React.Component {
   render() {    
     return (   
       <div className={styles.wrapper}>
+        <Header />
         <ListWrapper
           items={this.state.items}
         />
@@ -78,9 +80,6 @@ class App extends React.Component {
         >
             RESET
         </Button>
-        <ListWrapper
-          items={this.state.items}
-        />
       </div>
     )
   };

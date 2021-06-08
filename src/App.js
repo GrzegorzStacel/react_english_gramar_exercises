@@ -69,9 +69,9 @@ class App extends React.Component {
   render() {    
     return (   
       <div className={styles.wrapper}>
-        <h2 className={styles.title}>
-          Uzupełnij odpowiednimi przyimkami czasu in/on/at
-        </h2>
+        <ListWrapper
+          items={this.state.items}
+        />
         <Button
             setClassName={styles.resetBtn}    
             handleOnClick={(e) => this.resetFN(e)}

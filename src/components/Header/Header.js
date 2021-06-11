@@ -1,15 +1,12 @@
 import React from 'react'
+import HeaderNavigation from './HeaderNavigation'
+import styles from './Header.module.scss';
 
 const Header = () => {
     return (
-        <header>
-            <h1>Ćwiczenia - Przyimki</h1>
-            <nav>
-                <ul>
-                    <li>Czasu</li>
-                    <li>Miejsca</li>
-                </ul>
-            </nav>
+        <header className={styles.wrapper}>
+            <h1 className={styles.logo}>Przyimki</h1>
+            <HeaderNavigation />
         </header>
     )
 }

@@ -25,21 +25,21 @@ class ListItem extends React.Component {
                         setClassName={styles.answer}
                         id='in'
                     >
-                        IN
+                        In
                     </Button>
                     <Button
                         handleOnClick={this.handleClickAnswer}
                         setClassName={styles.answer}
                         id='on'
                     >
-                        ON
+                        On
                     </Button>
                     <Button
                         handleOnClick={this.handleClickAnswer}
                         setClassName={styles.answer}
                         id='at'
                     >
-                        AT
+                        At
                     </Button>
                 </div>
             </li>

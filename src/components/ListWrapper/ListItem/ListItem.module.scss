@@ -1,49 +1,65 @@
-$bgAnswerButton: yellow;
-$bgCorrectAnswerButton: green;
-$bgWrongAnswerButton: red;
+$bgAnswerButtonAndText: black;
+$bgCorrectAnswerButtonAndText: #219653;
+$bgWrongAnswerButtonAndText: #F90000;
 
 .wrapper{
     list-style: none;
     padding: 20px;
     margin: 0 0 40px;
-    border: 1px solid #000;
+    border: 2px solid #E5E5E5;
+    border-radius: 26px;
+    background: rgba(252, 163, 17, 1);
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    min-height: 150px;
     
     .quesion{
-        font-size: 22px;
-
-        span{
-            color: red;
-        }
+        font-size: 1.4em;
+        font-weight: 700;
+        margin: 15px 0px 35px;
     }
 
     .answersWrapper{
-        width: 60%;
+        width: 100%;
         display: flex;
         justify-content: space-around;
-        // margin-bottom: 20px;
         
         .answer{
             color: black;
-            border: 1px solid #000;
-            padding: 10px;
-            font-size: 17px;
-            background: $bgAnswerButton;
-            padding: 10px 20px;
-            max-width: 100px;
+            font-weight: 700;
+            font-size: 1.3em;
+            border: 3px solid $bgAnswerButtonAndText;
+            border-radius: 38px;
+            background: white;
+            height: 45px;
+            max-width: 150px;
+            min-width: 140px;
         }
 
         .correct{
             @extend .answer;
-            background: $bgCorrectAnswerButton;
+            border-color: $bgCorrectAnswerButtonAndText;
+            color: $bgCorrectAnswerButtonAndText;
         }
 
         .wrong{
             @extend .answer;
-            background: $bgWrongAnswerButton;
+            border-color: $bgWrongAnswerButtonAndText;
+            color: $bgWrongAnswerButtonAndText;
+        }
+    }
+}
+
+@media (max-width: 800px){
+    .answersWrapper{
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+
+        .answer{
+            margin-bottom: 10px;
         }
     }
 }

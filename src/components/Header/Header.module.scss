@@ -1,0 +1,12 @@
+.wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 40px 10px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.logo{
+    color: #FCA311;
+}

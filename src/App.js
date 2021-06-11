@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './App.module.scss';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ListWrapper from './components/ListWrapper/ListWrapper';
 import Button from './components/Button/Button';
 import stylesListItem from './components/ListWrapper/ListItem/ListItem.module.scss'
@@ -68,19 +69,19 @@ class App extends React.Component {
   }
   
   render() {    
-    return (   
-      <div className={styles.wrapper}>
-        <Header />
-        <ListWrapper
-          items={this.state.items}
-        />
-        <Button
+    return (
+        <div className={styles.wrapper}>
+          <Header />
+          <ListWrapper
+            items={this.state.items}
+            />
+          <Button
             setClassName={styles.resetBtn}    
             handleOnClick={(e) => this.resetFN(e)}
-        >
-            RESET
-        </Button>
-      </div>
+              >
+              reset
+          </Button>
+        </div>
     )
   };
 }

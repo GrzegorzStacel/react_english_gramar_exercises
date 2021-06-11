@@ -70,6 +70,7 @@ class App extends React.Component {
   
   render() {    
     return (
+      <BrowserRouter>
         <div className={styles.wrapper}>
           <Header />
           <ListWrapper
@@ -82,6 +83,7 @@ class App extends React.Component {
               reset
           </Button>
         </div>
+      </BrowserRouter>
     )
   };
 }

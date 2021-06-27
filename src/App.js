@@ -1,10 +1,12 @@
 import React from 'react';
 import styles from './App.module.scss';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import ListWrapper from './components/ListWrapper/ListWrapper';
-import Button from './components/Button/Button';
+import AppContext from './components/context';
 import stylesListItem from './components/ListWrapper/ListItem/ListItem.module.scss'
 import Header from './components/Header/Header';
+import PlaceView from './views/Prepositions/PlaceView/PlaceView';
+import TimeView from './views/Prepositions/TimeView/TimeView';
+import MainView from './views/Main/Main';
 
 const initialStateItems = [
   {
@@ -33,6 +35,28 @@ class App extends React.Component {
     items: [...this.getRandomQuestions(initialStateItems)],
   }
   
+  
+  resetFn = (e) => {
+      const collectionOfAnswerButtons = e.target.parentElement.children
+      
+      for (let i = 0; i < collectionOfAnswerButtons[2].children.length; i++) {
+        for (let j = 0; j < collectionOfAnswerButtons[2].children[i].children[1].children.length; j++){
+          collectionOfAnswerButtons[2].children[i].children[1].children[j].className = stylesListItem.answer
+        }
+      }
+      
+      this.setStateAndUpdate();
+      this.forceUpdate()
+    }
+    
+    setStateAndUpdate() {
+    this.setState({
+      items: [...this.getRandomQuestions(initialStateItems)]
+    })
+  
+    return initialStateItems
+  }
+  
   getRandomQuestions(array) {
     var i = array.length,
     j = 0,
@@ -45,44 +69,26 @@ class App extends React.Component {
       array[i] = array[j];
       array[j] = temp;
     }
+    
     return array;
   }
-  
-  resetFN = (e) => {
-    const collectionOfAnswerButtons = e.target.parentElement.children
 
-    for (let i = 0; i < collectionOfAnswerButtons[2].children.length; i++) {
-      for (let j = 0; j < collectionOfAnswerButtons[2].children[i].children[1].children.length; j++){
-        collectionOfAnswerButtons[2].children[i].children[1].children[j].className = stylesListItem.answer
-      }
+  render() {
+    const contextElements = {
+      ...this.state,
+      resetFn: this.resetFn
     }
 
-    this.setStateAndUpdate();
-  }
-  
-  setStateAndUpdate() {
-    this.setState({
-      items: [...this.getRandomQuestions(initialStateItems)]
-    })
-  
-    this.forceUpdate()
-  }
-  
-  render() {    
     return (
       <BrowserRouter>
-        <div className={styles.wrapper}>
-          <Header />
-          <ListWrapper
-            items={this.state.items}
-            />
-          <Button
-            setClassName={styles.resetBtn}    
-            handleOnClick={(e) => this.resetFN(e)}
-              >
-              reset
-          </Button>
-        </div>
+        <AppContext.Provider value={contextElements}>
+          <div className={styles.wrapper}>
+            <Header />
+            <Route exact path='/' component={MainView} />
+            <Route path='/miejsca' component={PlaceView} />
+            <Route path='/czasu' component={TimeView} />
+          </div>
+        </AppContext.Provider>
       </BrowserRouter>
     )
   };

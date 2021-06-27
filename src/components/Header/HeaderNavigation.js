@@ -10,7 +10,7 @@ function HeaderNavigation() {
                     <NavLink exact
                         activeClassName={styles.navItemLinkActive}
                         className={styles.navItemLink}
-                        to='/przyimki-miejsca'>
+                        to='/czasu'>
                         Czasu
                     </NavLink>
                 </li>
@@ -18,7 +18,7 @@ function HeaderNavigation() {
                     <NavLink
                         activeClassName={styles.navItemLinkActive}
                         className={styles.navItemLink}
-                        to='/przyimki-miejsca'
+                        to='/miejsca'
                     >
                         Miejsca
                     </NavLink>

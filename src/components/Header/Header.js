@@ -1,11 +1,14 @@
 import React from 'react'
 import HeaderNavigation from './HeaderNavigation'
 import styles from './Header.module.scss';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
         <header className={styles.wrapper}>
-            <h1 className={styles.logo}>Przyimki</h1>
+            <Link className={styles.logo} to='/'>
+                Przyimki
+            </Link>
             <HeaderNavigation />
         </header>
     )

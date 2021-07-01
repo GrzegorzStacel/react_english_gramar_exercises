@@ -10,7 +10,7 @@ const TimeView = () => {
                 <>
                     <p>This is an Time View</p>
                     <ListWrapper
-                        items={context.items}
+                        items={context.itemsTime}
                         placeOfArrayItems={0}
                     />
                     <Button

@@ -1,0 +1,33 @@
+$orange: #fca311;
+
+.wrapper{
+    margin-top: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.bigNav{
+    text-decoration: none;
+    color: #000;
+    padding: 50px;
+    margin: 10px 0;
+    background: $orange;
+    width: 70%;
+    border-radius: 10px;
+    border: 1px solid black;
+    transition: 0.1s;
+    box-shadow: 0 0px 15px -5px black;
+    text-align: center;
+    font-size: 20px;
+
+    &:hover{
+        box-shadow: 0 5px 20px -5px black;
+    }
+}
+
+@media(max-width: 500px){
+    .bigNav{
+        padding: 15px;
+    }
+}

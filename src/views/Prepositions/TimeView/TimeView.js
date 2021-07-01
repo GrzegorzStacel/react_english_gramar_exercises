@@ -2,9 +2,8 @@ import React from 'react'
 import Button from '../../../components/Button/Button'
 import AppContext from '../../../components/context';
 import ListWrapper from '../../../components/ListWrapper/ListWrapper'
-import styles from './TimeView.module.scss';
 
-const TimeView = ({ setClassName }) => {
+const TimeView = () => {
     return (
         <AppContext.Consumer>
             {(context) => (
@@ -15,10 +14,10 @@ const TimeView = ({ setClassName }) => {
                         placeOfArrayItems={0}
                     />
                     <Button
-                        className={setClassName}    
+                        setClassName={context.stylesResetButton}    
                         handleOnClick={context.resetFn}
                     >
-                        reset
+                        RESET
                     </Button>
                 </>
             )}

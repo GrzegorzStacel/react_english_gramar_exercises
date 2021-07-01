@@ -9,13 +9,13 @@ const ListItem = ({ onClickFn, ...item }) => {
         <li className={styles.wrapper}>
             <p className={styles.quesion}>{item.question}</p>
             <div className={styles.answersWrapper}>
-                { nameId.map(items => (
+                { nameId.map(nameIdItems => (
                     <Button
                         handleOnClick={(e) => onClickFn(e, item.answer)}
                         setClassName={styles.answer}
-                        id={items}
+                        id={nameIdItems}
                         >
-                            {items}
+                            {nameIdItems}
                         </Button>
                     ))
                 }

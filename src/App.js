@@ -8,49 +8,7 @@ import PlaceView from './views/Prepositions/PlaceView/PlaceView';
 import TimeView from './views/Prepositions/TimeView/TimeView';
 import MainView from './views/Main/Main';
 
-// const initialStateItems = {
-//   PrzyimkiCzasu: [
-//     {
-//       question: 'Time: Shall we go to the cinema ... Sunday?',
-//       answer: 'on',
-//     }, {
-//       question: 'Time: He graduated from Oxford ... 1985.',
-//       answer: 'in',
-//     }, {
-//       question: 'Time: I must get up early ... the morning.',
-//       answer: 'in',
-//     }, {
-//       question: 'The shops open ... nine.',
-//       answer: 'at',
-//     }, {
-//       question: 'She has never seen the sea ... winter.',
-//       answer: 'in',
-//     }, {
-//       question: 'I am going to meet her ... Wednesday.',
-//       answer: 'on',
-//     },
-//   ],
-//   PrzyimkiMiejsca: [
-//     {
-//       question: 'Miejsca1',
-//       answer: 'in',
-//     }, {
-//       question: 'Miejsca2',
-//       answer: 'on',
-//     }, {
-//       question: 'Miejsca3',
-//       answer: 'on',
-//     }, {
-//       question: 'Miejsca4',
-//       answer: 'on',
-//     }, {
-//       question: 'Miejsca5',
-//       answer: 'on',
-//     },
-//   ]
-// }
-
-const initialStateItems = [
+const initialStateItemsTime = [
     {
       question: 'Time: Shall we go to the cinema ... Sunday?',
       answer: 'on',
@@ -61,23 +19,43 @@ const initialStateItems = [
       question: 'Time: I must get up early ... the morning.',
       answer: 'in',
     }, {
-      question: 'The shops open ... nine.',
+      question: 'Time:The shops open ... nine.',
       answer: 'at',
     }, {
-      question: 'She has never seen the sea ... winter.',
+      question: 'Time:She has never seen the sea ... winter.',
       answer: 'in',
     }, {
-      question: 'I am going to meet her ... Wednesday.',
+      question: 'Time:I am going to meet her ... Wednesday.',
+      answer: 'on',
+    },
+]
+
+const initialStateItemsPlace = [
+    {
+      question: 'Place: Shall we go to the cinema ... Sunday?',
+      answer: 'on',
+    }, {
+      question: 'Place: He graduated from Oxford ... 1985.',
+      answer: 'in',
+    }, {
+      question: 'Place: I must get up early ... the morning.',
+      answer: 'in',
+    }, {
+      question: 'Place:The shops open ... nine.',
+      answer: 'at',
+    }, {
+      question: 'Place:She has never seen the sea ... winter.',
+      answer: 'in',
+    }, {
+      question: 'Place:I am going to meet her ... Wednesday.',
       answer: 'on',
     },
   ]
   
 class App extends React.Component {
   state = {
-    // items: [...this.getRandomQuestions({ ...initialStateItems })],
-    // items: [...this.getRandomQuestions(initialStateItems.PrzyimkiCzasu)],
-    // items: [initialStateItems.PrzyimkiCzasu]
-    items: [...this.getRandomQuestions(initialStateItems)],
+    itemsTime: [...this.getRandomQuestions(initialStateItemsTime)],
+    itemsPlace: [...this.getRandomQuestions(initialStateItemsPlace)],
   }
   
   
@@ -95,18 +73,10 @@ class App extends React.Component {
     }
     
     setStateAndUpdate() {
-    // const wartosci = Object.values(initialStateItems)
-
-    // for (let i = 0; i < wartosci.length; i++) {
-    //   this.getRandomQuestions(wartosci[i])
-    // }
-
     this.setState({
-      // items: [...this.initialStateItems]
-      items: [...this.getRandomQuestions(initialStateItems)]
+      itemsTime: [...this.getRandomQuestions(initialStateItemsTime)],
+      itemsPlace: [...this.getRandomQuestions(initialStateItemsPlace)]
     })
-  
-    return initialStateItems
   }
   
   getRandomQuestions(array) {

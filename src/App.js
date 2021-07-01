@@ -128,7 +128,8 @@ class App extends React.Component {
   render() {
     const contextElements = {
       ...this.state,
-      resetFn: this.resetFn
+      resetFn: this.resetFn,
+      stylesResetButton: styles.resetBtn
     }
 
     return (

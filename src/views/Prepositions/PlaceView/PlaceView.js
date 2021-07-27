@@ -11,7 +11,7 @@ const PlaceaView = () => {
                     <p>This is an Place View</p>
                     <ListWrapper
                         items={context.itemsPlace}
-                        placeOfArrayItems={0}
+                        isReset={context.isReset}
                     />
                     <Button
                         setClassName={context.stylesResetButton}    

@@ -21,8 +21,9 @@ $orange: #fca311;
     text-align: center;
     font-size: 20px;
 
-    &:hover{
+    &:hover, &:focus{
         box-shadow: 0 5px 20px -5px black;
+        outline: none;
     }
 }
 

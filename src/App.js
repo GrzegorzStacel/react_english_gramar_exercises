@@ -7,73 +7,40 @@ import Header from './components/Header/Header';
 import PlaceView from './views/Prepositions/PlaceView/PlaceView';
 import TimeView from './views/Prepositions/TimeView/TimeView';
 import MainView from './views/Main/Main';
-
-const initialStateItemsTime = [
-    {
-      question: 'Time: Shall we go to the cinema ... Sunday?',
-      answer: 'on',
-    }, {
-      question: 'Time: He graduated from Oxford ... 1985.',
-      answer: 'in',
-    }, {
-      question: 'Time: I must get up early ... the morning.',
-      answer: 'in',
-    }, {
-      question: 'Time:The shops open ... nine.',
-      answer: 'at',
-    }, {
-      question: 'Time:She has never seen the sea ... winter.',
-      answer: 'in',
-    }, {
-      question: 'Time:I am going to meet her ... Wednesday.',
-      answer: 'on',
-    },
-]
-
-const initialStateItemsPlace = [
-    {
-      question: 'Place: Shall we go to the cinema ... Sunday?',
-      answer: 'on',
-    }, {
-      question: 'Place: He graduated from Oxford ... 1985.',
-      answer: 'in',
-    }, {
-      question: 'Place: I must get up early ... the morning.',
-      answer: 'in',
-    }, {
-      question: 'Place:The shops open ... nine.',
-      answer: 'at',
-    }, {
-      question: 'Place:She has never seen the sea ... winter.',
-      answer: 'in',
-    }, {
-      question: 'Place:I am going to meet her ... Wednesday.',
-      answer: 'on',
-    },
-  ]
+import {initialStateItemsPlace, initialStateItemsTime} from './data/Data';
   
 class App extends React.Component {
   state = {
     itemsTime: [...this.getRandomQuestions(initialStateItemsTime)],
     itemsPlace: [...this.getRandomQuestions(initialStateItemsPlace)],
+    isReset: false,
   }
   
   
   resetFn = (e) => {
-      const collectionOfAnswerButtons = e.target.parentElement.children
-      
-      for (let i = 0; i < collectionOfAnswerButtons[2].children.length; i++) {
-        for (let j = 0; j < collectionOfAnswerButtons[2].children[i].children[1].children.length; j++){
-          collectionOfAnswerButtons[2].children[i].children[1].children[j].className = stylesListItem.answer
-        }
+    const collectionOfAnswerButtons = e.target.parentElement.children
+    
+    for (let i = 0; i < collectionOfAnswerButtons[2].children.length; i++) {
+      for (let j = 0; j < collectionOfAnswerButtons[2].children[i].children[1].children.length; j++) {
+        collectionOfAnswerButtons[2].children[i].children[1].children[j].className = stylesListItem.answer
       }
-      
-      this.setStateAndUpdate();
-      this.forceUpdate()
     }
     
-    setStateAndUpdate() {
-    this.setState({
+    this.setState = ({
+      isReset: true,
+    })
+    
+    this.setStateAndUpdate();
+    this.forceUpdate()
+    
+    // this.setState({
+    //   isReset: false,
+    // })
+  }
+    
+  setStateAndUpdate() {
+    console.log('this in app', this);
+    this.setState = ({
       itemsTime: [...this.getRandomQuestions(initialStateItemsTime)],
       itemsPlace: [...this.getRandomQuestions(initialStateItemsPlace)]
     })
@@ -95,11 +62,19 @@ class App extends React.Component {
     return array;
   }
 
+  randomFN = (e) => {
+    console.log('here app', this);
+    this.setState = ({
+      isReset: false,
+    })
+  }
+
   render() {
     const contextElements = {
       ...this.state,
       resetFn: this.resetFn,
-      stylesResetButton: styles.resetBtn
+      stylesResetButton: styles.resetBtn,
+      randomFN: this.randomFN,
     }
 
     return (

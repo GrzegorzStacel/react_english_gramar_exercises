@@ -15,12 +15,23 @@ $borderColor: #E5E5E5;
     flex-direction: column;
     align-items: center;
     min-height: 150px;
+    box-shadow: 0 0px 15px -5px black;
     
+    &:not(.active){
+        filter: blur(4px);
+    }
+
     .quesion{
         font-size: 1.4em;
         font-weight: 700;
         margin: 15px 0px 35px;
         text-align: center;
+    }
+    
+    &:hover, 
+    &:focus-within{
+        outline: none;
+        box-shadow: 0 5px 20px -5px black;
     }
 
     .answersWrapper{
@@ -38,6 +49,15 @@ $borderColor: #E5E5E5;
             height: 45px;
             max-width: 150px;
             min-width: 140px;
+            outline: none;
+            box-shadow: 0 0px 15px -5px black;
+
+            &:hover, &:focus{
+                box-shadow: 0 5px 20px -5px black;
+                outline: none;
+                border-width: 4px;
+                transform: translateY(-2px);
+            }
         }
 
         .correct{
@@ -52,6 +72,10 @@ $borderColor: #E5E5E5;
             color: $bgWrongAnswerButtonAndText;
         }
     }
+}
+
+.active{
+    filter: blur(0px);
 }
 
 @media (max-width: 800px){

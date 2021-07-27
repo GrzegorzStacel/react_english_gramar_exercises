@@ -1,7 +1,8 @@
 import React from 'react';
 
-const Button = ({ handleOnClick, setClassName, children }) => (
+const Button = ({ handleOnClick, setClassName, children, manageDisabledButtons }) => (
     <button
+        disabled={manageDisabledButtons}
         onClick={ handleOnClick }
         className={setClassName}
     >

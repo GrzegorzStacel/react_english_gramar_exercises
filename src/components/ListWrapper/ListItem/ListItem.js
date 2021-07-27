@@ -2,26 +2,46 @@ import React from 'react';
 import styles from './ListItem.module.scss';
 import Button from '../../Button/Button';
 
-const ListItem = ({ onClickFn, ...item }) => {
-    const nameId = ['in', 'on', 'at']
+const ListItem = ({ manageRemovalDisabledAttributeFromButtonsHandler, ...item }) => {
 
-    return (       
-        <li className={styles.wrapper}>
+    const adverbNameArr = ['in', 'on', 'at']
+
+    const handleClickAnswer = (e, correctAnswer) => {
+        const nextId = e.target.parentElement.parentElement.id
+        console.log('click');
+        if (e.target.innerText.toLowerCase() === correctAnswer) {
+            manageRemovalDisabledAttributeFromButtonsHandler(item.questionNumberOnTheArray)
+            item.changeClassOfTheNextElementAfterTheCorrectAnswerHandler(nextId);
+
+            return e.target.className = styles.correct
+        }
+
+        e.target.className = styles.wrong
+    }
+
+    return (
+        <li
+            className={[item.questionNumberOnTheArray === 0 ? styles.active : ''] + ' ' + styles.wrapper}
+            id={`${item.questionNumberOnTheArray}-listItem`}
+        >
             <p className={styles.quesion}>{item.question}</p>
             <div className={styles.answersWrapper}>
-                { nameId.map(nameIdItems => (
+                {adverbNameArr.map(adverbNameArrItems => (
                     <Button
-                        handleOnClick={(e) => onClickFn(e, item.answer)}
+                        handleOnClick={(e) => {
+                            handleClickAnswer(e, item.answer);
+                        } }
                         setClassName={styles.answer}
-                        id={nameIdItems}
-                        >
-                            {nameIdItems}
-                        </Button>
+                        {...item}
+                    >
+                        {adverbNameArrItems}
+                    </Button>
                     ))
                 }
             </div>
-        </li>
-    )
-}
-
-export default ListItem
+            </li>
+            )
+        }
+        
+        export default ListItem
+        

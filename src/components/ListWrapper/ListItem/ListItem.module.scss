@@ -72,12 +72,19 @@ $borderColor: #E5E5E5;
             border-color: $bgWrongAnswerButtonAndText;
             color: $bgWrongAnswerButtonAndText;
         }
+
+        .gray{
+            @extend .answer;
+            background: rgb(170, 170, 170);
+        }
     }
 }
 
 .active{
     filter: blur(0px);
 }
+
+
 
 @media (max-width: 800px){
     .answersWrapper{

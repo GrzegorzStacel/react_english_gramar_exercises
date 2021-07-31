@@ -9,7 +9,10 @@ const ListItem = ({ manageRemovalDisabledAttributeFromButtonsHandler, stateActiv
     const handleClickAnswer = (e, correctAnswer) => {
         const nextId = e.target.parentElement.parentElement.id
         if (e.target.innerText.toLowerCase() === correctAnswer) {
-            manageRemovalDisabledAttributeFromButtonsHandler(item.questionNumberOnTheArray)
+            const actualId = e.target.parentElement.children
+            for (item of actualId){
+                item.className = styles.gray
+            }
             changeClassOfTheNextElementAfterTheCorrectAnswer(nextId)
 
             return e.target.className = styles.correct

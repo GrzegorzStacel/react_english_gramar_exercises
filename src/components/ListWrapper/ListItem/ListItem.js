@@ -2,17 +2,21 @@ import React, { useEffect } from 'react';
 import styles from './ListItem.module.scss';
 import Button from '../../Button/Button';
 
-const ListItem = ({ manageRemovalDisabledAttributeFromButtonsHandler, stateActive, stateHandler, ...item }) => {
+const ListItem = ({ manageRemovalDisabledAttributeFromButtonsHandler, stateHandler, questionNumberOnTheArray, ...item }) => {
 
     const adverbNameArr = ['in', 'on', 'at']
 
     const handleClickAnswer = (e, correctAnswer) => {
-        const nextId = e.target.parentElement.parentElement.id
+
         if (e.target.innerText.toLowerCase() === correctAnswer) {
             const actualId = e.target.parentElement.children
+            const nextId = e.target.parentElement.parentElement.id
+            
             for (item of actualId){
                 item.className = styles.gray
             }
+            
+            manageRemovalDisabledAttributeFromButtonsHandler(questionNumberOnTheArray)
             changeClassOfTheNextElementAfterTheCorrectAnswer(nextId)
 
             return e.target.className = styles.correct
@@ -59,8 +63,8 @@ const ListItem = ({ manageRemovalDisabledAttributeFromButtonsHandler, stateActiv
         <>
             { SetDefaultClassesAfterReset() }
             <li
-                    className={styles.wrapper + ' ' + [item.questionNumberOnTheArray === 0 ? styles.active : null]}
-                    id={`${item.questionNumberOnTheArray}-listItem`}
+                    className={styles.wrapper + ' ' + [questionNumberOnTheArray === 0 ? styles.active : null]}
+                    id={`${questionNumberOnTheArray}-listItem`}
                 >
                     <p className={styles.quesion}>{item.question}</p>
                     <div className={styles.answersWrapper}>

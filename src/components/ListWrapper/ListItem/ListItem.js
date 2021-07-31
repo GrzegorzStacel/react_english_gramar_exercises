@@ -2,14 +2,15 @@ import React, { useEffect } from 'react';
 import styles from './ListItem.module.scss';
 import Button from '../../Button/Button';
 
-const ListItem = ({ manageRemovalDisabledAttributeFromButtonsHandler, ...item }) => {
+const ListItem = ({ manageRemovalDisabledAttributeFromButtonsHandler, stateActive, stateHandler, ...item }) => {
 
     const adverbNameArr = ['in', 'on', 'at']
 
     const handleClickAnswer = (e, correctAnswer) => {
         const nextId = e.target.parentElement.parentElement.id
         if (e.target.innerText.toLowerCase() === correctAnswer) {
-            manageRemovalDisabledAttributeFromButtonsHandler(item.questionNumberOnTheArray, nextId)
+            manageRemovalDisabledAttributeFromButtonsHandler(item.questionNumberOnTheArray)
+            changeClassOfTheNextElementAfterTheCorrectAnswer(nextId)
 
             return e.target.className = styles.correct
         }
@@ -17,9 +18,22 @@ const ListItem = ({ manageRemovalDisabledAttributeFromButtonsHandler, ...item })
         e.target.className = styles.wrong
     }
 
+    const changeClassOfTheNextElementAfterTheCorrectAnswer = (nextId) => {
+        const newId = nextId.replace(/(\d+)+/g, (match, number) => {
+            if ((parseInt(number) + 1) >= stateHandler.active.length) {
+                return parseInt(number)
+            }
+
+            return parseInt(number) + 1
+        })
+
+        const offDisabledNextElement = document.getElementById(newId)
+        offDisabledNextElement.className = styles.active + ' ' + styles.wrapper
+    }
+
     const SetDefaultClassesAfterReset = () => {
         useEffect(() => {
-            if (item.isResetNow) {
+            if (stateHandler.isResetNow) {
 
                 // Bezpośrednie zmiany klas elementów (li oraz button) za pomocą odnoszenia się do nich poprzez ich konkretne klasy lub id było nieskuteczne ponieważ 
                 // zupełnie losowo niektóre z tych elementów nie były znajdywane w drzewie DOM i co za tym idzie ich klasy nie były nadpisywane.
@@ -37,7 +51,6 @@ const ListItem = ({ manageRemovalDisabledAttributeFromButtonsHandler, ...item })
             }
         }, [])
     }
-
 
     return (
         <>

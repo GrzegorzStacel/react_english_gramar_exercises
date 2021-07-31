@@ -28,20 +28,3 @@ $bgColorDark: #d5d5d5;
     }
     
 }
-
-.resetBtn{
-    border: 2px solid $orange;
-    border-radius: 10px;
-    padding: 10px 60px;
-    margin-bottom: 30px;
-    font-size: 18px;
-    background: $bgColor;
-    transition: 0.1s;
-
-    &:hover{
-        transform: scale(0.95);
-        color: $orange;
-        font-weight: bold;
-        background: $bgColorDark;
-    }
-}

@@ -1,7 +1,6 @@
 import React from 'react'
 import AppContext from '../../../components/context';
 import ListWrapper from '../../../components/ListWrapper/ListWrapper'
-import Button from '../../../components/Button/Button'
 
 const PlaceaView = () => {
     return (
@@ -11,14 +10,8 @@ const PlaceaView = () => {
                     <p>This is an Place View</p>
                     <ListWrapper
                         items={context.itemsPlace}
-                        isReset={context.isReset}
+                        setStateAndUpdate={context.setStateAndUpdate}
                     />
-                    <Button
-                        setClassName={context.stylesResetButton}    
-                        handleOnClick={context.resetFn}
-                    >
-                        RESET
-                    </Button>
                 </>
             )}
         </AppContext.Consumer>

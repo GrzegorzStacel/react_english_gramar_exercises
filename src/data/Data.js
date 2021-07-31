@@ -5,7 +5,7 @@ export const initialStateItemsTime = [
     }, {
       question: 'Time: He graduated from Oxford ... 1985.',
       answer: 'in',
-  }, { 
+    }, { 
       question: 'Time: I must get up early ... the morning.',
       answer: 'in',
     }, {

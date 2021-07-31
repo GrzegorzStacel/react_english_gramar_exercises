@@ -1,5 +1,26 @@
+$bgOrange: #fca311;
+$bgColorDark: #d5d5d5;
+$borderColor: #E5E5E5;
+
 .listWrapper{
     padding: 0;
     margin-bottom: 30px;
     width: 75%;
+}
+
+.resetBtn{
+    border: 2px solid $bgOrange;
+    border-radius: 10px;
+    padding: 10px 60px;
+    margin-bottom: 30px;
+    font-size: 18px;
+    background: $borderColor;
+    transition: 0.1s;
+
+    &:hover{
+        transform: scale(0.95);
+        color: $bgOrange;
+        font-weight: bold;
+        background: $bgColorDark;
+    }
 }

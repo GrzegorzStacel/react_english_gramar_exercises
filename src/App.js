@@ -1,8 +1,7 @@
 import React from 'react';
 import styles from './App.module.scss';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import AppContext from './components/context';
-import stylesListItem from './components/ListWrapper/ListItem/ListItem.module.scss'
 import Header from './components/Header/Header';
 import PlaceView from './views/Prepositions/PlaceView/PlaceView';
 import TimeView from './views/Prepositions/TimeView/TimeView';
@@ -13,36 +12,12 @@ class App extends React.Component {
   state = {
     itemsTime: [...this.getRandomQuestions(initialStateItemsTime)],
     itemsPlace: [...this.getRandomQuestions(initialStateItemsPlace)],
-    isReset: false,
   }
-  
-  
-  resetFn = (e) => {
-    const collectionOfAnswerButtons = e.target.parentElement.children
-    
-    for (let i = 0; i < collectionOfAnswerButtons[2].children.length; i++) {
-      for (let j = 0; j < collectionOfAnswerButtons[2].children[i].children[1].children.length; j++) {
-        collectionOfAnswerButtons[2].children[i].children[1].children[j].className = stylesListItem.answer
-      }
-    }
-    
-    this.setState = ({
-      isReset: true,
-    })
-    
-    this.setStateAndUpdate();
-    this.forceUpdate()
-    
-    // this.setState({
-    //   isReset: false,
-    // })
-  }
-    
-  setStateAndUpdate() {
-    console.log('this in app', this);
-    this.setState = ({
+
+  setStateAndUpdate = () => {
+    this.setState({
       itemsTime: [...this.getRandomQuestions(initialStateItemsTime)],
-      itemsPlace: [...this.getRandomQuestions(initialStateItemsPlace)]
+      itemsPlace: [...this.getRandomQuestions(initialStateItemsPlace)],
     })
   }
   
@@ -62,19 +37,10 @@ class App extends React.Component {
     return array;
   }
 
-  randomFN = (e) => {
-    console.log('here app', this);
-    this.setState = ({
-      isReset: false,
-    })
-  }
-
   render() {
     const contextElements = {
       ...this.state,
-      resetFn: this.resetFn,
-      stylesResetButton: styles.resetBtn,
-      randomFN: this.randomFN,
+      setStateAndUpdate: this.setStateAndUpdate,
     }
 
     return (

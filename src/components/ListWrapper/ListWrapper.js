@@ -2,74 +2,90 @@ import * as React from 'react';
 import ListItem from './ListItem/ListItem';
 import styles from './ListWrapper.module.scss'
 import listItemStyles from './ListItem/ListItem.module.scss';
+import Button from '../Button/Button';
+
 
 class ListWrapper extends React.Component {
     state = {
-        active: new Array(this.props.items.length).fill(false),
+        active: [true].concat(new Array(this.props.items.length - 1).fill(false)),
         verifyCounter: 0,
+        isResetNow: false,
     }
 
-    manageRemovalDisabledAttributeFromButtons = (questionNumberOnTheArray) => {
-        this.setState = ({
-            active: this.state.active[questionNumberOnTheArray + 1] = true, // remove disabled attribute from next buttons
-            active: this.state.active[questionNumberOnTheArray] = false, // add disabled attribute to previous buttons
-            verifyCounter: this.state.verifyCounter++
-        })
-    }
-
-    changeFirstElementOfArrayInState = () => {
-        if (this.state.verifyCounter === 0) {
-            this.setState = ({
-                active: this.state.active[0] = true // remove disabled attribute from first question buttons
+    manageRemovalDisabledAttributeFromButtons = (questionNumberOnTheArray, nextId) => {
+        this.setState(prevState => {
+            const active = prevState.active.map((item, index) => {
+                if (index === questionNumberOnTheArray) {
+                    return false
+                } if (index === questionNumberOnTheArray + 1) {
+                    return true
+                } else {
+                    return item
+                }
             })
-        }
+            
+            return {
+                active,
+                verifyCounter: prevState.verifyCounter + 1
+            }
+
+        },
+            () => this.changeClassOfTheNextElementAfterTheCorrectAnswer(nextId)
+        )
     }
 
     changeClassOfTheNextElementAfterTheCorrectAnswer = (nextId) => {
-
         const newId = nextId.replace(/(\d+)+/g, (match, number) => {
             if ((parseInt(number) + 1) >= this.state.active.length) {
-                return parseInt(number) // a alfa version to resolve te problem with error  
+                return parseInt(number)
             }
 
-            return parseInt(number) + 1 //an error when I answer a the last question
+            return parseInt(number) + 1
         })
 
         const offDisabledNextElement = document.getElementById(newId)
         offDisabledNextElement.className = listItemStyles.active + ' ' + listItemStyles.wrapper
-
-        this.forceUpdate() 
     }
 
     isReset = () => {
-        if (this.props.isReset) {
-            this.setState = ({
-                active: this.state.active.fill(false),
-                verifyCounter: 0 
-            })
-        }
+        this.setState({
+            active: [true].concat(new Array(this.props.items.length - 1).fill(false)),
+            verifyCounter: 0,
+            isResetNow: true
+        }, () => {
+            this.props.setStateAndUpdate()
+        })
+    }
+    
+    changeStateIsResetNow = () => {
+        this.setState({
+            isResetNow: false
+        })
     }
     
     render() {
-        if (this.props.isReset) {
-            this.isReset()
-            this.props.randomFN()
-        }
-        this.changeFirstElementOfArrayInState()
-
         return (
-            <ul className={styles.listWrapper}>
+            <>
+            <ul className={styles.listWrapper} id={'listWrapper'}>
                     {this.props.items.map((item, step) => (
                     <ListItem
                         manageRemovalDisabledAttributeFromButtonsHandler={this.manageRemovalDisabledAttributeFromButtons}
-                        changeClassOfTheNextElementAfterTheCorrectAnswerHandler={this.changeClassOfTheNextElementAfterTheCorrectAnswer}
                         manageDisabledButtons={this.state.active[step] === false ? true : false}
                         key={item.question.slice(0, 10) + step}
                         questionNumberOnTheArray={step}
+                        isResetNow={this.state.isResetNow}
+                        changeStateIsResetNow={this.changeStateIsResetNow}
                         {...item}
                     />
                 ))}
-            </ul> 
+            </ul>
+            <Button
+                    handleOnClick={this.isReset}
+                    setClassName={styles.resetBtn}
+            >
+                RESET
+            </Button>
+            </>
         )
     }
 }

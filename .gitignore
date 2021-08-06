@@ -23,3 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 quokka.js
+
+# Local Netlify folder
+.netlify

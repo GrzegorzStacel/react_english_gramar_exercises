@@ -1,9 +1,9 @@
 @keyframes fadeIn {
     from { opacity: 0; }
-      to { opacity: auto; }
+    to { opacity: auto; }
 }
 
-.wrapper{
+.wrapper {
     position: fixed;
     right: 0;
     top: 130px;
@@ -11,58 +11,104 @@
     flex-direction: column;
     align-items: flex-end;
 
-    .trigger{
-        background: #fca311;
-        border: 1px solid black;
-        border-right: none;
-        width: 50px;
+    .triggerWrapper {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        transition: .1s;
-        cursor: pointer;
-    
-        @mixin border-radius{
-            border-radius: 10px 0 0 10px
-        }
-    
-        &:hover{
-            width: 70px;
-            @include border-radius;
-        }  
-    
-        &.first{
-            border-radius: 10px 0 0;
-        }
-    
-        &.inside{
-            border-radius: 0;
-        }
-    
-        &.last{
-            border-radius: 0 0 0 10px;
-        }
-    
-        &.first:hover, &.inside:hover, &.last:hover{
-            @include border-radius;
-        }
-        
-        .rules{
-            height: 0;
-            
-            p{
-                animation: fadeIn 1s;
-                display: none;
+        flex-direction: column;
+        align-items: flex-end;
+
+        .trigger {
+            background: #fca311;
+            border: 1px solid black;
+            border-right: none;
+            width: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            transition: .1s;
+            cursor: pointer;
+
+            @mixin border-radius {
+                border-radius: 10px 0 0 10px
+            }
+
+            &:hover {
+                width: 70px;
+                @include border-radius;
+            }
+
+            &.first {
+                border-radius: 10px 0 0;
+            }
+
+            &.inside {
+                border-radius: 0;
+            }
+
+            &.last {
+                border-radius: 0 0 0 10px;
+            }
+
+            &.first:hover,
+            &.inside:hover,
+            &.last:hover {
+                @include border-radius;
+            }
+
+            &.big {
+                width: 300px;
+                transition: .1s;
+                
+                &.first:hover,
+                &.inside:hover,
+                &.last:hover {
+                    border-radius: 10px 0 0 0;
+                }
+            }
+
+            .info {
+                margin: 0;
+                font-size: 20px;
+                font-weight: bold;
+                padding: 10px 5px;
+                user-select: none;
+            }
+
+            @media(max-width: 420px) {
+                width: 35px;
+                min-height: 50px;
+
+                &:hover {
+                    width: 35px;
+                    border-radius: 0;
+                }
+
+                &.big{
+                    width: 300px;
+                }
+
+                &.first:hover {
+                    border-radius: 10px 0 0 0;
+                }
+
+                &.inside:hover {
+                    border-radius: 0;
+                }
+
+                &.last:hover {
+                    border-radius: 0 0 0 10px;
+                }
             }
         }
-        
-        &.big{
-            width: 300px;
-            transition: .1s;
-            border-radius: 10px 0 0 10px;
-            
-            .rules{
+
+        .rules {
+            height: 0;
+
+            p {
+                display: none;
+            }
+
+            &.show{
                 background: white;
                 display: block;
                 width: 300px;
@@ -70,28 +116,22 @@
                 border-right: none;
                 height: auto;
                 border-radius: 0 0 0 10px;
-                animation: fadeIn 1s;
-    
-                p{
+                animation: fadeIn .5s;
+                overflow-y: auto;
+                max-height: 650px;
+
+                p {
                     display: block;
                 }
-            }
-            
-            &:hover{
-                width: 300px;
-                
-                .rules{
-                    width: 100%;
+
+                @media(max-width: 420px) {
+                    max-height: 280px;
                 }
             }
         }
-        
-        .info{
-            margin: 0;
-            font-size: 20px;
-            font-weight: bold;
-            padding: 10px 5px;
-            user-select: none;
-        }
+    }
+
+    @media(max-width: 420px) {
+        top: 90px;
     }
 }

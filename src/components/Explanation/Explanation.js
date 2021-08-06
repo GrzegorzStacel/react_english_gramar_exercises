@@ -32,11 +32,15 @@ const Explanation = () => {
         
         return <>
             <div
-                className={activeClasses[index] ? classesIfTrue : classesIfFalse}
-                onClick={() => toggleClass(index)}
+                className={styles.triggerWrapper}
             >
-                <p className={styles.info}>{name}</p>
-                <div className={styles.rules}>
+                <div
+                    className={activeClasses[index] ? classesIfTrue : classesIfFalse}
+                    onClick={() => toggleClass(index)}
+                >
+                    <p className={styles.info}>{name}</p>
+                </div>
+                <div className={activeClasses[index] ? styles.rules + ' ' + styles.show : styles.rules}>
                     {rule}
                 </div>
             </div>

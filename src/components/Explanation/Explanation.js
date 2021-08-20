@@ -27,7 +27,7 @@ const Explanation = () => {
         const wrapperRef = useRef(null);
         ClickOutsideAndClose(wrapperRef);
 
-        console.log('wrapperref', wrapperRef.current.parentElement.offsetHeight);
+        // console.log('wrapperref', wrapperRef.current.parentElement.offsetHeight);
         return <>
             <div
                 className={styles.triggerWrapper}

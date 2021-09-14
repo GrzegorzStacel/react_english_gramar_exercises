@@ -8,7 +8,6 @@ const PlaceaView = () => {
         <AppContext.Consumer>
             {(context) => (
                 <>
-                    <p>This is an Place View</p>
                     <ListWrapper
                         items={context.itemsPlace}
                         setStateAndUpdate={context.setStateAndUpdate}

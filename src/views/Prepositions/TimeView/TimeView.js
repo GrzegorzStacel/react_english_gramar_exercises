@@ -8,7 +8,6 @@ const TimeView = () => {
         <AppContext.Consumer>
             {(context) => (
                 <>
-                    <p>This is an Time View</p>
                     <ListWrapper
                         items={context.itemsTime}
                         setStateAndUpdate={context.setStateAndUpdate}

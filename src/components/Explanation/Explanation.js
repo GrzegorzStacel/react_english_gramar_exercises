@@ -2,44 +2,63 @@ import React, { useState, useRef, useEffect } from 'react'
 import styles from './Explanation.module.scss';
 import atRule  from './Rules/atRule';
 import inRule  from './Rules/inRule';
-import onRule  from './Rules/onRule';
+import onRule from './Rules/onRule';
 
 const Explanation = () => {
     const [activeClasses, setActive] = useState([false, false, false]);
     const [adverbsListName] = useState(['at', 'in', 'on']);
     const [adverbData] = useState([atRule, inRule, onRule]);
+    const componentRef = useRef(null);
 
-    const toggleClass = (index) => {
-        const newActiveClasses = activeClasses.map((item, step) => {
-            if (item) return false
-            if (index === step) return true
-            return false
-        })
+    useEffect(() => {
+        document.addEventListener("click", handleClick);
+        return () => document.removeEventListener("click", handleClick);
 
-        setActive(newActiveClasses)
+        function handleClick(e) {
+            if(componentRef && componentRef.current){
+                const ref = componentRef.current
+
+                if (!ref.contains(e.target.parentElement[0])) {
+                    if (e.target.id === 'at') return toggleClass(e, 0) 
+                    if (e.target.id === 'in') return toggleClass(e, 1) 
+                    if (e.target.id === 'on') return toggleClass(e, 2) 
+                    else return toggleClass(e, 999)
+                }
+            }
+        }
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const toggleClass = (e, index) => {
+        if (adverbsListName.find(element => element === e.target.id) && index < 3) {
+            
+            const newActiveClasses = activeClasses.map((item, step) => {
+                if (index === step) return true
+                if (item || !item) return false
+                return null
+            })
+            
+            return setActive(newActiveClasses)
+        }
+
+        if (index === 999) return setActive([false, false, false])
     };
+
 
     const BuildRule = (name, index, rule) => {
         const borderRadiusClass = ['first', 'inside', 'last']
         const classesIfTrue = styles.trigger + ' ' + styles.big + ' ' + styles[borderRadiusClass[0]]
         const classesIfFalse = styles.trigger + ' ' + styles[borderRadiusClass[index]]
 
-        const wrapperRef = useRef(null);
-        ClickOutsideAndClose(wrapperRef);
-
-        // console.log('wrapperref', wrapperRef.current.parentElement.offsetHeight);
         return <>
             <div
                 className={styles.triggerWrapper}
-                ref={wrapperRef}
-                >
+            >
                 <div
                     className={activeClasses[index] ? classesIfTrue : classesIfFalse}
-                    // ref={wrapperRef}
-                    onClick={() => toggleClass(index)}
                     key={activeClasses[index] + index}
+                    id={adverbsListName[index]}
                     >
-                    <p className={styles.info}>{name}</p>
+                    {name}
                 </div>
                 <div className={activeClasses[index] ? styles.rules + ' ' + styles.show : styles.rules}>
                     {rule}
@@ -48,31 +67,11 @@ const Explanation = () => {
         </>
     }
 
-    const ClickOutsideAndClose = (ref) => {
-        useEffect(() => {
-            function handleClickOutside(event) {
-                if (ref.current && !ref.current.contains(event.target) ) {
-                    console.log('refcurrent1', ref.current.parentElement, ref.current.parentElement.offsetHeight);
-                    // console.log('click', event.target);
-                    // if (activeClasses.includes(true)) {
-                        // console.log('yes');
-                        setActive([false, false, false])
-                        // }
-                    }
-                }
-                
-            console.log('refcurrent2', ref, 'ref.current', ref.current.parentElement, ref.current.parentElement.offsetHeight);
-            document.addEventListener("mousedown", handleClickOutside);
-
-            return () => {
-                document.removeEventListener("mousedown", handleClickOutside);
-            };
-        }, [ref]);
-    }
-
     return (
         <>
-            <div className={styles.wrapper}>
+            <div className={styles.wrapper}
+                ref={componentRef}
+            >
                 {adverbsListName.map((item, index) => {
                     return BuildRule(item, index, adverbData[index])
                 })}

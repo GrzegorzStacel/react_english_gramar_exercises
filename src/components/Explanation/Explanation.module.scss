@@ -16,6 +16,7 @@
         flex-direction: column;
         align-items: flex-end;
         width: 50px;
+        
 
         .trigger {
             background: #fca311;
@@ -28,6 +29,11 @@
             flex-wrap: wrap;
             transition: .1s;
             cursor: pointer;
+            margin: 0;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px 5px;
+            user-select: none;
 
             @mixin border-radius {
                 border-radius: 10px 0 0 10px
@@ -65,14 +71,6 @@
                 &.last:hover {
                     border-radius: 10px 0 0 0;
                 }
-            }
-
-            .info {
-                margin: 0;
-                font-size: 20px;
-                font-weight: bold;
-                padding: 10px 5px;
-                user-select: none;
             }
 
             @media(max-width: 420px) {
